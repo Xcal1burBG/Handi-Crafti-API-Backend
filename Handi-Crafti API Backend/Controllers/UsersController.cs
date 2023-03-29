@@ -11,6 +11,7 @@ using AutoMapper;
 using Handi_Crafti_API_Backend.Services.ReviewsService;
 using Handi_Crafti_API_Backend.Services.UsersService;
 using Handi_Crafti_API_Backend.Models.DTOs;
+using Handi_Crafti_API_Backend.Models.InputModels;
 
 namespace Handi_Crafti_API_Backend.Controllers
 {
@@ -33,7 +34,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         [HttpPost]
         [Route("/register")]
 
-        public async Task<IActionResult> CreateUser(UserDTO input)
+        public async Task<IActionResult> CreateUser(CreateUserInputModel input)
         {
             var user = await this._usersService.CreateUser(input.Username, input.Email, input.AvatarImage);
             var output = this._mapper.Map<UserDTO>(user);

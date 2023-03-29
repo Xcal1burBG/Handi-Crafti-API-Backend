@@ -10,6 +10,5 @@ namespace Handi_Crafti_API_Backend.Models.DTOs
         public string AvatarImage { get; set; }
         public double AverageRating { get; set; }
 
-
     }
 }
