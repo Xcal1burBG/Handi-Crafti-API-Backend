@@ -1,15 +1,15 @@
 ﻿using Handi_Crafti_API_Backend.DataBase.DBModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace Handi_Crafti_API_Backend.DTOs
+namespace Handi_Crafti_API_Backend.Models.DTOs
 {
     public class UserDTO
     {
-        public String Username { get; set; }
-        public String Email { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
         public string AvatarImage { get; set; }
         public double AverageRating { get; set; }
-        
+
 
     }
 }

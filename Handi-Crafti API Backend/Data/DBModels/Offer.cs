@@ -13,5 +13,6 @@ namespace Handi_Crafti_API_Backend.DataBase.DBModels
         public DateTime CreatedAt { get; set; }
         public string Image { get; set; }
         public String Description { get; set; }
+
     }
 }

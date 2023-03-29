@@ -22,7 +22,6 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         public OffersController(IOffersService offersService, IMapper mapper)
         {
-          
             _offersService = offersService;
             _mapper = mapper;
         }

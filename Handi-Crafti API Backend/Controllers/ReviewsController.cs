@@ -28,12 +28,12 @@ namespace Handi_Crafti_API_Backend.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllReviews()
-        {
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllReviews()
+        //{
 
            
-        }
+        //}
 
     }
 }

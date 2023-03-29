@@ -10,7 +10,6 @@ namespace Handi_Crafti_API_Backend.DataBase.DBModels
         [MinLength(3), MaxLength(20)]
         public string AvatarImage { get; set; }
 
-
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Message> Messages { get; set; }
