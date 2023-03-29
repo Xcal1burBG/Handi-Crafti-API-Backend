@@ -12,12 +12,28 @@ using AutoMapper;
 
 namespace Handi_Crafti_API_Backend.Controllers
 {
-        public class ReviewsController : ControllerBase
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ReviewsController : ControllerBase
 
     {
         private readonly IReviewsService _reviewsService;
         private readonly IMapper _mapper;
 
+        public ReviewsController(IReviewsService reviewsService, IMapper mapper)
+        {
+
+            _reviewsService = reviewsService;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllReviews()
+        {
+
+           
+        }
 
     }
 }
