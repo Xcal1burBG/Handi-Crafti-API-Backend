@@ -3,13 +3,9 @@
     public class OfferDTO
     {
         public Guid Id { get; set; }
-
-        [MinLength(10), MaxLength(100)]
-        public string Title { get; set; }
         public Guid HandiCrafterId { get; set; }
-        public User HandiCrafter { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string Image { get; set; }
+        public string Title { get; set; }
         public String Description { get; set; }
+        public string Images { get; set; }
     }
 }
