@@ -5,11 +5,7 @@ using System.Reflection;
 
 namespace Handi_Crafti_API_Backend.DataBase.DBModels
 {
-    public class User : IdentityUser<Guid>
-    {
-        [MinLength(3), MaxLength(20)]
-        public string AvatarImage { get; set; }
-
+    public class User : IdentityUser<Guid>    {
         public ICollection<Offer> Offers { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Message> Messages { get; set; }

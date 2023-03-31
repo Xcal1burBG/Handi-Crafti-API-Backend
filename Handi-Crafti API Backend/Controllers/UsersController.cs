@@ -24,7 +24,7 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         public UsersController(IUsersService usersService, IMapper mapper)
         {
-           
+
             _usersService = usersService;
             _mapper = mapper;
         }
@@ -36,7 +36,12 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         public async Task<IActionResult> CreateUser(CreateUserInputModel input)
         {
-            var user = await this._usersService.CreateUser(input.Username, input.Email, input.AvatarImage);
+            var user = new User();
+
+            if (input.Password == input.Repass)
+            {
+                user = await this._usersService.CreateUser(input.Username, input.Email, input.PhoneNumber, input.Password);
+            }
             var output = this._mapper.Map<UserDTO>(user);
 
 

@@ -7,7 +7,6 @@ namespace Handi_Crafti_API_Backend.Models.DTOs
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public string AvatarImage { get; set; }
         public double AverageRating { get; set; }
 
     }
