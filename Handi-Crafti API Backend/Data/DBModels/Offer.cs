@@ -11,7 +11,7 @@ namespace Handi_Crafti_API_Backend.DataBase.DBModels
         public Guid HandiCrafterId { get; set; }
         public User HandiCrafter { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string Image { get; set; }
+        public string Images { get; set; }
         public String Description { get; set; }
 
     }

@@ -71,7 +71,7 @@ namespace Handi_Crafti_API_Backend.Migrations
                     b.Property<Guid>("HandiCrafterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Images")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

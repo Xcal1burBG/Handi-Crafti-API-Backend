@@ -26,7 +26,7 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
             user.PhoneNumber = phoneNumber;
             user.Email = email;
             user.PasswordHash = hasher.HashPassword(user, password);
-           
+
 
             await this._db.Users.AddAsync(user);
             await this._db.SaveChangesAsync();
