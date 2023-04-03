@@ -40,10 +40,9 @@ namespace Handi_Crafti_API_Backend.Controllers
 
             if (input.Password == input.Repass)
             {
-                user = await this._usersService.CreateUser(input.Username, input.Email, input.PhoneNumber, input.Password);
+                user = await this._usersService.CreateUser(input.UserName, input.Email, input.PhoneNumber, input.Password);
             }
             var output = this._mapper.Map<UserDTO>(user);
-
 
             return Ok(output);
 

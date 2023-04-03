@@ -14,6 +14,7 @@ namespace Handi_Crafti_API_Backend.DataBase.DBModels
         public Guid HandiCrafterId { get; set; }
         public User HandiCrafter { get; set; }
 
+        public Guid CustomerId { get; set; }
         public User Customer { get; set; }
         public DateTime CreatedAt { get; set; }
 
