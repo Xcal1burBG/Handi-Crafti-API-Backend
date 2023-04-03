@@ -8,6 +8,8 @@ namespace Handi_Crafti_API_Backend.Models.DTOs.Profiles
         public MyMappingProfile()
         {
             CreateMap<User, UserDTO>();
+            CreateMap<Offer, OfferDTO>();
+            CreateMap<Review, ReviewDTO>();
         }
 
     }

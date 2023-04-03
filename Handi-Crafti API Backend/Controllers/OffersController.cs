@@ -29,7 +29,8 @@ namespace Handi_Crafti_API_Backend.Controllers
             _mapper = mapper;
         }
 
-        // create Offer
+        // Create 
+
         [HttpPost]
         [Route("/create")]
         public async Task<IActionResult> CreateOffer(CreateOfferInputModel input)
@@ -44,6 +45,11 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
 
+        //// Get 
+
+        //[HttpGet]
+        //[Route("/create")]
+        //public async Tasko
 
     }
 }
