@@ -62,6 +62,7 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         // Edit
 
+        [HttpPut]
         [Route("{id}/edit")]
         public async Task<IActionResult> EditOffer(EditOfferInputModel input)
         {
@@ -73,6 +74,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
         // Delete
+        [HttpDelete]
         [Route("{id}/delete")]
         public async Task<IActionResult> DeleteOffer(Guid offerId)
         {
