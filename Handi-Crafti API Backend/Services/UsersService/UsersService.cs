@@ -1,6 +1,8 @@
 ﻿using Handi_Crafti_API_Backend.Data;
 using Handi_Crafti_API_Backend.DataBase.DBModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Handi_Crafti_API_Backend.Services.UsersService
 {
@@ -12,6 +14,9 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
         {
             _db = db;
         }
+
+
+        // Create
 
         public async Task<User> CreateUser(String username, String email, String phoneNumber, string password)
         {
@@ -30,6 +35,36 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
 
             await this._db.Users.AddAsync(user);
             await this._db.SaveChangesAsync();
+
+            return user;
+
+        }
+
+
+        // Get User by Id
+
+        public async Task<User> GetUserById(Guid userId)
+        {
+            var user = await this._db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+#pragma warning disable CS8603 // Possible null reference return.
+            return user;
+#pragma warning restore CS8603 // Possible null reference return.
+        }
+
+
+        // Edit
+
+        public async Task<User> EditUserById(Guid userId, string email, string phoneNumber, string password)
+        {
+            var user = await this._db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+            {
+#pragma warning disable CS8603 // Possible null reference return.
+                return null;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
 
             return user;
 

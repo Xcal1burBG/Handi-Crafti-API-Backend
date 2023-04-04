@@ -5,7 +5,7 @@ namespace Handi_Crafti_API_Backend.Services.ReviewsService
     public interface IReviewsService
     {
         public Task<Review> CreateReview(int value, String text, Guid handiCrafterId, Guid customerId);
-        public Task<Review> GetAllReviesByOfferId(Guid offerId);
+        public Task<IEnumerable<Review>> GetAllReviesByOfferId(Guid handicrafterId);
 
 
     }

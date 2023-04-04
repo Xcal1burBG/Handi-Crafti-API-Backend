@@ -1,5 +1,6 @@
 ﻿using Handi_Crafti_API_Backend.Data;
 using Handi_Crafti_API_Backend.DataBase.DBModels;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Handi_Crafti_API_Backend.Services.ReviewsService
@@ -31,6 +32,14 @@ namespace Handi_Crafti_API_Backend.Services.ReviewsService
 
         }
 
+        public async Task<IEnumerable<Review>> GetAllReviewsByOfferId(Guid handicrafterId)
+        {
+            var reviews = await this._db.Reviews
+                .Where(x => x.HandiCrafterId == handicrafterId)
+                .ToListAsync();
 
+            return reviews;
+
+        }
     }
 }

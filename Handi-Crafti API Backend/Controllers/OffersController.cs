@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Handi_Crafti_API_Backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("offers")]
     [ApiController]
     public class OffersController : ControllerBase
     {
@@ -45,11 +45,21 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
 
-        //// Get 
+        ////// Get 
 
         //[HttpGet]
-        //[Route("/create")]
-        //public async Tasko
+
+        ////[HttpGet]
+        ////[Route("/create")]
+        ////public async Tasko
+
+        //// Edit
+
+        //[Route("{id}/edit")]
+
+
+        //// Delete 
+        //[Route("{id}/edit")]
 
     }
 }

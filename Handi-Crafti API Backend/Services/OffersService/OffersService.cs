@@ -12,6 +12,7 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
             _db = db;
         }
 
+        // Create
         public async Task<Offer> CreateOffer(Guid handiCrafterId, string title, String description, String images)
         {
             var offer = new Offer
@@ -29,10 +30,50 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
             return offer;
 
+        }    
+
+
+       
+
+       
+        // Get
+        
+        public Task<Offer> GetOfferById(Guid offerId)
+        {
+            throw new NotImplementedException();
+        } 
+
+
+        public Task<Offer> GetAllOffers()
+        {
+            throw new NotImplementedException();
         }
-          
 
 
+        // Edit
 
+        public Task<Offer> EditOffer(Guid offerId, string title, string description, string images)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        // Delete
+        
+        public async Task<Offer> DeleteOffer(Guid offerId)
+        {
+            var offer = await this._db.Offers.FindAsync(offerId);
+
+            if (offer != null)
+            {
+                this._db.Offers.Remove(offer);
+                await this._db.SaveChangesAsync();
+            }
+         
+            return offer;
+            
+
+
+        }
     }
 }
