@@ -47,7 +47,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
 
-        // Get 
+        // Get all offers
 
         [HttpGet]
         [Route("catalog")]
@@ -58,6 +58,20 @@ namespace Handi_Crafti_API_Backend.Controllers
 
             return Ok(output);
         }
+
+
+        // Get offer By id
+
+        [HttpGet]
+        [Route("{offerId}")]
+        public async Task<IActionResult> GetOfferById(Guid offerId)
+        {
+            var offer = await this._offersService.GetOfferById(offerId);
+            var output = this._mapper.Map<OfferDTO>(offer);
+
+            return Ok(output);
+        }
+
 
 
         // Edit
