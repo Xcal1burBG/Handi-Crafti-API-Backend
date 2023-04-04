@@ -60,10 +60,22 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
 
+        // Get offers by UserId
+        [HttpGet]
+        [Route("user/{userId}")]
+        public async Task<IActionResult> GetOffersByUserId(Guid userId)
+        {
+            var offers = await this._offersService.GetOffersByUserId(userId);
+            var output = this._mapper.Map<IEnumerable<OfferDTO>>(offers);
+
+            return Ok(output);
+        }
+
+
         // Get offer By id
 
         [HttpGet]
-        [Route("{offerId}")]
+        [Route("get/{offerId}")]
         public async Task<IActionResult> GetOfferById(Guid offerId)
         {
             var offer = await this._offersService.GetOfferById(offerId);

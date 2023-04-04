@@ -46,15 +46,22 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
         }
 
+        public async Task<IEnumerable<Offer>> GetOffersByUserId(Guid userId)
+        {
+            var offers = await this._db.Offers.Where(x => x.HandiCrafterId == userId).ToListAsync();
+
+            return offers;
+        }
+
 
         // Get all
 
         public async Task<IEnumerable<Offer>> GetAllOffers()
         {
             var offers = await this._db.Offers.ToListAsync();
-            //#pragma warning disable CS8603 // Possible null reference return.
+
             return offers;
-            //#pragma warning restore CS8603 // Possible null reference return.
+
 
         }
 
