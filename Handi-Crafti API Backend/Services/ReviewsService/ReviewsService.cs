@@ -32,7 +32,7 @@ namespace Handi_Crafti_API_Backend.Services.ReviewsService
 
         }
 
-        public async Task<IEnumerable<Review>> GetAllReviewsByOfferId(Guid handicrafterId)
+        public async Task<IEnumerable<Review>> GetAllReviewsByUserId(Guid handicrafterId)
         {
             var reviews = await this._db.Reviews
                 .Where(x => x.HandiCrafterId == handicrafterId)

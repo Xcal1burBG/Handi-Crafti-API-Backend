@@ -13,6 +13,7 @@ using Handi_Crafti_API_Backend.Services.OffersService;
 using Handi_Crafti_API_Backend.Models.InputModels;
 using Handi_Crafti_API_Backend.Models.DTOs;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Handi_Crafti_API_Backend.Models.OutputModels;
 
 namespace Handi_Crafti_API_Backend.Controllers
 {
@@ -29,10 +30,11 @@ namespace Handi_Crafti_API_Backend.Controllers
             _mapper = mapper;
         }
 
+
         // Create 
 
         [HttpPost]
-        [Route("/create")]
+        [Route("create")]
         public async Task<IActionResult> CreateOffer(CreateOfferInputModel input)
         {
 
@@ -45,21 +47,39 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
 
-        ////// Get 
+        // Get 
 
-        //[HttpGet]
+        [HttpGet]
+        [Route("catalog")]
+        public async Task<IActionResult> GetAllOffers()
+        {
+            var offers = await this._offersService.GetAllOffers();
+            var output = this._mapper.Map<IEnumerable<OfferDTO>>(offers);
 
-        ////[HttpGet]
-        ////[Route("/create")]
-        ////public async Tasko
-
-        //// Edit
-
-        //[Route("{id}/edit")]
+            return Ok(output);
+        }
 
 
-        //// Delete 
-        //[Route("{id}/edit")]
+        // Edit
+
+        [Route("{id}/edit")]
+        public async Task<IActionResult> EditOffer(EditOfferInputModel input)
+        {
+            var offer = await this._offersService.EditOffer(input.Id, input.Title, input.Description, input.Images);
+            var output = this._mapper.Map<OfferDTO>(offer);
+
+            return Ok(output);
+
+        }
+
+        // Delete
+        [Route("{id}/delete")]
+        public async Task<IActionResult> DeleteOffer(Guid offerId)
+        {
+            await this._offersService.DeleteOffer(offerId);
+            return Ok();
+        }
+
 
     }
 }

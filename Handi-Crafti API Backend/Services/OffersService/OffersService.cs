@@ -1,5 +1,6 @@
 ﻿using Handi_Crafti_API_Backend.Data;
 using Handi_Crafti_API_Backend.DataBase.DBModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Handi_Crafti_API_Backend.Services.OffersService
 {
@@ -30,36 +31,57 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
             return offer;
 
-        }    
+        }
 
 
-       
+        // Get by Id
 
-       
-        // Get
-        
-        public Task<Offer> GetOfferById(Guid offerId)
+        public async Task<Offer> GetOfferById(Guid offerId)
         {
-            throw new NotImplementedException();
-        } 
+            var offer = await this._db.Offers.FirstOrDefaultAsync(x => x.Id == offerId);
+#pragma warning disable CS8603 // Possible null reference return.
+            return offer;
+#pragma warning restore CS8603 // Possible null reference return.
 
 
-        public Task<Offer> GetAllOffers()
+        }
+
+
+        // Get all
+
+        public async Task<IEnumerable<Offer>> GetAllOffers()
         {
-            throw new NotImplementedException();
+            var offers = await this._db.Offers.ToListAsync();
+            //#pragma warning disable CS8603 // Possible null reference return.
+            return offers;
+            //#pragma warning restore CS8603 // Possible null reference return.
+
         }
 
 
         // Edit
 
-        public Task<Offer> EditOffer(Guid offerId, string title, string description, string images)
+        public async Task<Offer> EditOffer(Guid offerId, string title, string description, string images)
         {
-            throw new NotImplementedException();
+            var offer = await this._db.Offers.FirstOrDefaultAsync(x => x.Id == offerId);
+
+            if (offer == null)
+            {
+                return null;
+            }
+
+            offer.Title = title;
+            offer.Description = description;
+            offer.Images = images;
+
+            await this._db.SaveChangesAsync();
+
+            return offer;
         }
 
 
         // Delete
-        
+
         public async Task<Offer> DeleteOffer(Guid offerId)
         {
             var offer = await this._db.Offers.FindAsync(offerId);
@@ -69,9 +91,9 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
                 this._db.Offers.Remove(offer);
                 await this._db.SaveChangesAsync();
             }
-         
+
             return offer;
-            
+
 
 
         }

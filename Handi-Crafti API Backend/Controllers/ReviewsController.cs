@@ -17,7 +17,7 @@ using Handi_Crafti_API_Backend.Models.DTOs;
 namespace Handi_Crafti_API_Backend.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("reviews")]
     [ApiController]
     public class ReviewsController : ControllerBase
 
@@ -34,8 +34,9 @@ namespace Handi_Crafti_API_Backend.Controllers
 
 
         // Create review
+
         [HttpPost]
-        [Route("/postreview")]
+        [Route("post")]
 
         public async Task<IActionResult> CreateReview(CreateReviewInputModel input)
         {
@@ -45,6 +46,18 @@ namespace Handi_Crafti_API_Backend.Controllers
             return Ok(output);
 
         }
+
+        // Get All reviews
+        [HttpGet]
+        [Route("get")]
+        public async Task<IActionResult> GetAllReviewsByUserId(Guid handiCrafterId)
+        {
+            var reviews = await this._reviewsService.GetAllReviewsByUserId(handiCrafterId);
+            var output = this._mapper.Map<IEnumerable<ReviewDTO>>(reviews);
+
+            return Ok(output);
+        }
+
         
 
     }

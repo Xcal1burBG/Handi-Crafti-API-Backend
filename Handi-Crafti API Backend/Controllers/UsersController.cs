@@ -12,10 +12,11 @@ using Handi_Crafti_API_Backend.Services.ReviewsService;
 using Handi_Crafti_API_Backend.Services.UsersService;
 using Handi_Crafti_API_Backend.Models.DTOs;
 using Handi_Crafti_API_Backend.Models.InputModels;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Handi_Crafti_API_Backend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -31,8 +32,9 @@ namespace Handi_Crafti_API_Backend.Controllers
 
 
         // Create User
+
         [HttpPost]
-        [Route("/register")]
+        [Route("register")]
 
         public async Task<IActionResult> CreateUser(CreateUserInputModel input)
         {
@@ -46,6 +48,19 @@ namespace Handi_Crafti_API_Backend.Controllers
 
             return Ok(output);
 
+        }
+
+
+        // Edit User profile
+        [HttpPut]
+        [Route("{userId}edit")]
+        public async Task<IActionResult> EditUser(EditUserInputModel input)
+        {
+            var user = await this._usersService.EditUserById(input.UserId, input.Email, input.PhoneNumber, input.Password);
+
+            var output = this._mapper.Map<UserDTO>(user);
+
+            return Ok(output);
         }
 
 
