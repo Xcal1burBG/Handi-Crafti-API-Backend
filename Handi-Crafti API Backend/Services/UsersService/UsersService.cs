@@ -31,7 +31,7 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
             user.UserName = username;
             user.PhoneNumber = phoneNumber;
             user.Email = email;
-            user.PasswordHash = hasher.HashPassword(user, password);
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
 
 
             await this._db.Users.AddAsync(user);
@@ -42,10 +42,11 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
         }
 
 
-        // Get User by Username
+        // Login
         public async Task<User> Login(String userName, String password)
         {
             var user = await this._db.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            Console.WriteLine(user);
 
             if (user == null)
             {
@@ -54,10 +55,10 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
 #pragma warning restore CS8603 // Possible null reference return.
             }
 
-            var hasher = new PasswordHasher<User>();
-            var hashedPassword = hasher.HashPassword(user, password);
+            
+            var hashedPassword = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
 
-            if (user.PasswordHash == hashedPassword)
+            if (hashedPassword)
             {
                 return user;
 
