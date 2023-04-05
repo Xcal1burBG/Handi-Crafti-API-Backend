@@ -1,6 +1,7 @@
 ﻿using Handi_Crafti_API_Backend.Data;
 using Handi_Crafti_API_Backend.DataBase.DBModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -42,12 +43,30 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
 
 
         // Get User by Username
-        public async Task<User> GetUserByUserName(String userName)
+        public async Task<User> Login(String userName, String password)
         {
             var user = await this._db.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+
+            if (user == null)
+            {
 #pragma warning disable CS8603 // Possible null reference return.
-            return user;
+                return null;
 #pragma warning restore CS8603 // Possible null reference return.
+            }
+
+            var hasher = new PasswordHasher<User>();
+            var hashedPassword = hasher.HashPassword(user, password);
+
+            if (user.PasswordHash == hashedPassword)
+            {
+                return user;
+
+            }
+
+#pragma warning disable CS8603 // Possible null reference return.
+            return null;
+#pragma warning restore CS8603 // Possible null reference return.
+
         }
 
 
