@@ -57,7 +57,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         [Route("login")]
         public async Task<IActionResult> GetUserByUserName(String userName)
         {
-            var user = await this._usersService.GetUserById(userName);
+            var user = await this._usersService.GetUserByUserName(userName);
             var output = this._mapper.Map<UserDTO>(user);
 
             return Ok(output);

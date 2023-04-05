@@ -42,7 +42,7 @@ namespace Handi_Crafti_API_Backend.Services.UsersService
 
 
         // Get User by Username
-        public async Task<User> GetUserByUsername(String userName)
+        public async Task<User> GetUserByUserName(String userName)
         {
             var user = await this._db.Users.FirstOrDefaultAsync(x => x.UserName == userName);
 #pragma warning disable CS8603 // Possible null reference return.
