@@ -57,10 +57,9 @@ namespace Handi_Crafti_API_Backend.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(LoginInputModel input)
         {
-            var user = await this._usersService.Login(input.UserName, input.Password);
-            var output = this._mapper.Map<UserDTO>(user);
-
-            return Ok(output);
+            var loginUserDTO = await this._usersService.Login(input.UserName, input.Password);
+            
+            return Ok(loginUserDTO);
         }
 
 

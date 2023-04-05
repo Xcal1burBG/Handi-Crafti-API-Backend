@@ -8,6 +8,8 @@ using Handi_Crafti_API_Backend.DataBase.DBModels;
 using Handi_Crafti_API_Backend.Services.UsersService;
 using Handi_Crafti_API_Backend.Services.OffersService;
 using Handi_Crafti_API_Backend.Services.ReviewsService;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -38,6 +40,17 @@ builder.Services.AddCors(p => p.AddPolicy("corspolicy", build =>
     build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+
+});
+
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IOffersService, OffersService>();
 builder.Services.AddTransient<IReviewsService, ReviewsService>();
@@ -55,7 +68,6 @@ app.UseCors("corspolicy");
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
