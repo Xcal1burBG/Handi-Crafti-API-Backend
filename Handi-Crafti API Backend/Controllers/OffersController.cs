@@ -38,11 +38,9 @@ namespace Handi_Crafti_API_Backend.Controllers
         public async Task<IActionResult> CreateOffer(CreateOfferInputModel input)
         {
 
-            var offer = await this._offersService.CreateOffer(input.HandiCrafterId, input.Title, input.Description, input.Images);
+            var offerDTO = await this._offersService.CreateOffer(input.HandiCrafterId, input.Title, input.Description, input.Images);
 
-            var output = this._mapper.Map<OfferDTO>(offer);
-
-            return Ok(output);
+                       return Ok(offerDTO);
 
         }
 

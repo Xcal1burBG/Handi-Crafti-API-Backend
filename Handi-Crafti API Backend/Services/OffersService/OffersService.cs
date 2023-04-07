@@ -16,7 +16,7 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
         }
 
         // Create
-        public async Task<Offer> CreateOffer(Guid handiCrafterId, string title, String description, String images)
+        public async Task<OfferDTO> CreateOffer(Guid handiCrafterId, string title, String description, String images)
         {
             var offer = new Offer
             {
@@ -25,13 +25,30 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
                 Title = title,
                 Description = description,
                 Images = images
-
             };
 
             await this._db.Offers.AddAsync(offer);
             await this._db.SaveChangesAsync();
 
-            return offer;
+            var offerDTO = await this._db.Offers
+                .Include(o => o.HandiCrafter)
+                .Where(o => o.Id == offer.Id)
+                .Select(o => new OfferDTO
+                {
+                    Id = o.Id,
+                    HandiCrafterId = o.HandiCrafterId,
+                    HandiCraftersUsername = o.HandiCrafter.UserName,
+                    Title = o.Title,
+                    Description = o.Description,
+                    Email = o.HandiCrafter.Email,
+                    PhoneNumber = o.HandiCrafter.PhoneNumber,
+                    Images = o.Images
+                })
+                .FirstOrDefaultAsync();
+
+#pragma warning disable CS8603 // Possible null reference return.
+            return offerDTO;
+#pragma warning restore CS8603 // Possible null reference return.
 
         }
 
