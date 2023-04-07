@@ -1,5 +1,7 @@
 ﻿using Handi_Crafti_API_Backend.Data;
 using Handi_Crafti_API_Backend.DataBase.DBModels;
+using Handi_Crafti_API_Backend.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Handi_Crafti_API_Backend.Services.OffersService
@@ -56,11 +58,21 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
         // Get all
 
-        public async Task<IEnumerable<Offer>> GetAllOffers()
+        public async Task<IEnumerable<OfferDTO>> GetAllOffers()
         {
-            var offers = await this._db.Offers.ToListAsync();
+            var offerDTOs = await this._db.Offers
+                .Select(x => new OfferDTO
+                {
+                    Id = x.Id,
+                    HandiCrafterId = x.HandiCrafterId,
+                    HandiCraftersUsername = x.HandiCrafter.UserName,
+                    Title = x.Title,
+                    Description = x.Description,
+                    Images = x.Images
+                })
+                .ToListAsync();
 
-            return offers;
+            return offerDTOs;
 
 
         }
@@ -74,7 +86,9 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
             if (offer == null)
             {
+#pragma warning disable CS8603 // Possible null reference return.
                 return null;
+#pragma warning restore CS8603 // Possible null reference return.
             }
 
             offer.Title = title;
@@ -99,7 +113,9 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
                 await this._db.SaveChangesAsync();
             }
 
+#pragma warning disable CS8603 // Possible null reference return.
             return offer;
+#pragma warning restore CS8603 // Possible null reference return.
 
 
 
