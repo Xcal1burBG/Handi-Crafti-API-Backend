@@ -38,11 +38,24 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
         // Get by Id
 
-        public async Task<Offer> GetOfferById(Guid offerId)
+        public async Task<OfferDTO> GetOfferById(Guid offerId)
         {
-            var offer = await this._db.Offers.FirstOrDefaultAsync(x => x.Id == offerId);
+            var offerDTO = await _db.Offers
+            .Where(x => x.Id == offerId)
+            .Select(x => new OfferDTO
+            {
+                Id = x.Id,
+                HandiCrafterId = x.HandiCrafterId,
+                HandiCraftersUsername = x.HandiCrafter.UserName,
+                Title = x.Title,
+                Description = x.Description,
+                Email = x.HandiCrafter.Email,
+                PhoneNumber = x.HandiCrafter.PhoneNumber,
+                Images = x.Images
+            })
+            .FirstOrDefaultAsync();
 #pragma warning disable CS8603 // Possible null reference return.
-            return offer;
+            return offerDTO;
 #pragma warning restore CS8603 // Possible null reference return.
 
 
@@ -76,7 +89,7 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
             return offerDTOs;
 
-
+  
         }
 
 
