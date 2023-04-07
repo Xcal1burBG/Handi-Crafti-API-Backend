@@ -68,6 +68,8 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
                     HandiCraftersUsername = x.HandiCrafter.UserName,
                     Title = x.Title,
                     Description = x.Description,
+                    Email = x.HandiCrafter.Email,
+                    PhoneNumber = x.HandiCrafter.PhoneNumber,                    
                     Images = x.Images
                 })
                 .ToListAsync();

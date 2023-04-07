@@ -74,7 +74,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         // Get offer By id
 
         [HttpGet]
-        [Route("/details/{offerId}")]
+        [Route("details/{offerId}")]
 
         public async Task<IActionResult> GetOfferById(Guid offerId)
         {
