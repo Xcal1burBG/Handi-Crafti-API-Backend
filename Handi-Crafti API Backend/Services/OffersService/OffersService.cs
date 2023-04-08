@@ -91,10 +91,10 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
         // Get all
 
-        public async Task<IEnumerable<OfferDTO>> GetAllOffers()
+        public async Task<AllOffersWithReviewsForHandicrafterDTO[]> GetAllOffers()
         {
-            var offerDTOs = await this._db.Offers
-                .Select(x => new OfferDTO
+            var offerWithReviews = await this._db.Offers
+                .Select(x => new AllOffersWithReviewsForHandicrafterDTO
                 {
                     Id = x.Id,
                     HandiCrafterId = x.HandiCrafterId,
@@ -102,12 +102,17 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
                     Title = x.Title,
                     Description = x.Description,
                     Email = x.HandiCrafter.Email,
-                    PhoneNumber = x.HandiCrafter.PhoneNumber,                    
-                    Images = x.Images
-                })
-                .ToListAsync();
+                    PhoneNumber = x.HandiCrafter.PhoneNumber,
+                    Images = x.Images,
+                    ReviewsForHandiCrafter = x.HandiCrafter.Reviews.Select(z => new ReviewDTO
+                    {
+                        Text = z.Text,
+                        ReviewerUserName = z.HandiCrafter.UserName
+                    }).ToArray()
+                    
+                }).ToArrayAsync();
 
-            return offerDTOs;
+            return offerWithReviews;
 
   
         }

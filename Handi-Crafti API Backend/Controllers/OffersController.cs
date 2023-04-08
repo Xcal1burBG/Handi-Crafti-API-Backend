@@ -69,7 +69,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         }
 
 
-        // Get offer By id
+        // Get offer with reviews for User By offer id
 
         [HttpGet]
         [Route("details/{offerId}")]
@@ -82,9 +82,6 @@ namespace Handi_Crafti_API_Backend.Controllers
 
             return Ok(output);
         }
-
-      [HttpGet]
-        [Route("")]
 
 
         // Edit

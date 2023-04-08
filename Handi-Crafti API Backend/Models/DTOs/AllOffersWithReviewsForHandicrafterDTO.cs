@@ -1,6 +1,6 @@
 ﻿namespace Handi_Crafti_API_Backend.Models.DTOs
 {
-    public class OfferDTO
+    public class AllOffersWithReviewsForHandicrafterDTO
     {
         public Guid Id { get; set; }
         public Guid HandiCrafterId { get; set; }
@@ -10,6 +10,7 @@
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Images { get; set; }
-        
+
+        public ReviewDTO[] ReviewsForHandiCrafter { get; set; }
     }
 }
