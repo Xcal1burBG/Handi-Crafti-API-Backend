@@ -88,7 +88,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         // Edit
 
         [HttpPut]
-        [Route("{id}/edit")]
+        [Route("edit/{id}")]
         public async Task<IActionResult> EditOffer(EditOfferInputModel input)
         {
             var offer = await this._offersService.EditOffer(input.Id, input.Title, input.Description, input.Images);
@@ -100,7 +100,7 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         // Delete
         [HttpDelete]
-        [Route("{id}/delete")]
+        [Route("delete/{id}")]
         public async Task<IActionResult> DeleteOffer(Guid offerId)
         {
             await this._offersService.DeleteOffer(offerId);
