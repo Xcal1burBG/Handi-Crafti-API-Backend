@@ -40,7 +40,7 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         public async Task<IActionResult> CreateReview(CreateReviewInputModel input)
         {
-            var review = await this._reviewsService.CreateReview(input.Value, input.Text, input.HandiCrafterId, input.CustomerId);
+            var review = await this._reviewsService.CreateReview(input.Text, input.HandiCrafterId, input.ReviewerId);
 
             var output = this._mapper.Map<ReviewDTO>(review);
             return Ok(output);
@@ -49,13 +49,12 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         // Get All reviews
         [HttpGet]
-        [Route("{userId}")]
-        public async Task<IActionResult> GetAllReviewsByUserId(Guid handiCrafterId)
+        [Route("offer/{offerId}")]
+        public async Task<IActionResult> GetAllReviewsForUserByOfferId(Guid offerId)
         {
-            var reviews = await this._reviewsService.GetAllReviewsByUserId(handiCrafterId);
-            var output = this._mapper.Map<IEnumerable<ReviewDTO>>(reviews);
+            var reviews = await this._reviewsService.GetAllReviewsByUserId(offerId);
 
-            return Ok(output);
+            return Ok(reviews);
         }
 
         

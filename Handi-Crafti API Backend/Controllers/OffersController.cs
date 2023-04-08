@@ -83,6 +83,8 @@ namespace Handi_Crafti_API_Backend.Controllers
             return Ok(output);
         }
 
+      [HttpGet]
+        [Route("")]
 
 
         // Edit

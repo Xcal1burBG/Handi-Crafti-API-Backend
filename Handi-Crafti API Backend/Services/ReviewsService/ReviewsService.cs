@@ -1,5 +1,6 @@
 ﻿using Handi_Crafti_API_Backend.Data;
 using Handi_Crafti_API_Backend.DataBase.DBModels;
+using Handi_Crafti_API_Backend.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,12 +15,11 @@ namespace Handi_Crafti_API_Backend.Services.ReviewsService
             _db = db;
         }
 
-        public async Task<Review> CreateReview(int value, String text, Guid handiCrafterId, Guid customerId)
+        public async Task<Review> CreateReview(string text, Guid handiCrafterId, Guid customerId)
         {
             var review = new Review
             {
                 Id = Guid.NewGuid(),
-                Value = value,
                 Text = text,
                 HandiCrafterId = handiCrafterId,
                 CustomerId = customerId
@@ -32,11 +32,18 @@ namespace Handi_Crafti_API_Backend.Services.ReviewsService
 
         }
 
-        public async Task<IEnumerable<Review>> GetAllReviewsByUserId(Guid handicrafterId)
+        public async Task<OfferDetailsWithUserReviewsDTO[]> GetAllReviewsByUserId(Guid offerId)
         {
-            var reviews = await this._db.Reviews
-                .Where(x => x.HandiCrafterId == handicrafterId)
-                .ToListAsync();
+            var reviews = await this._db.Offers
+                .Where(x => x.Id == offerId)
+                .Select(x => new OfferDetailsWithUserReviewsDTO
+                {
+                    ReviewsForHandiCrafter = x.HandiCrafter.Reviews.Select(z => new ReviewDTO
+                    {
+                        Text = z.Text,
+                        ReviewerUserName = z.HandiCrafter.UserName
+                    }).ToArray()
+                }).ToArrayAsync();
 
             return reviews;
 

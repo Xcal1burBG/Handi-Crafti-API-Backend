@@ -52,6 +52,9 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
         }
 
+        // Get offerDetails with reviews of the handicrafter
+        [HttpGet]
+
 
         // Get by Id
 

@@ -3,9 +3,9 @@
     public class CreateReviewInputModel
     {
 
-        public int Value { get; set; }
+        //public int Value { get; set; }
         public String Text { get; set; }
         public Guid HandiCrafterId { get; set; }
-        public Guid CustomerId { get; set; }
+        public Guid ReviewerId { get; set; }
     }
 }
