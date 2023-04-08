@@ -36,7 +36,7 @@ namespace Handi_Crafti_API_Backend.Controllers
         // Create review
 
         [HttpPost]
-        [Route("post")]
+        [Route("post/{userId}")]
 
         public async Task<IActionResult> CreateReview(CreateReviewInputModel input)
         {
@@ -49,7 +49,7 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         // Get All reviews
         [HttpGet]
-        [Route("get")]
+        [Route("{userId}")]
         public async Task<IActionResult> GetAllReviewsByUserId(Guid handiCrafterId)
         {
             var reviews = await this._reviewsService.GetAllReviewsByUserId(handiCrafterId);
