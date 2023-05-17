@@ -81,9 +81,26 @@ namespace Handi_Crafti_API_Backend.Services.OffersService
 
         }
 
-        public async Task<IEnumerable<Offer>> GetOffersByUserId(Guid userId)
+        public async Task<AllOffersWithReviewsForHandicrafterDTO[]> GetOffersByUserId(Guid userId)
         {
-            var offers = await this._db.Offers.Where(x => x.HandiCrafterId == userId).ToListAsync();
+            var offers = await this._db.Offers.Where(x => x.HandiCrafterId == userId)
+                .Select(x => new AllOffersWithReviewsForHandicrafterDTO
+                {
+                    Id = x.Id,
+                    HandiCrafterId = x.HandiCrafterId,
+                    HandiCraftersUsername = x.HandiCrafter.UserName,
+                    Title = x.Title,
+                    Description = x.Description,
+                    Email = x.HandiCrafter.Email,
+                    PhoneNumber = x.HandiCrafter.PhoneNumber,
+                    Images = x.Images,
+                    ReviewsForHandiCrafter = x.HandiCrafter.Reviews.Select(z => new ReviewDTO
+                    {
+                        Text = z.Text,
+                        ReviewerUserName = z.HandiCrafter.UserName
+                    }).ToArray()
+
+                }).ToArrayAsync();
 
             return offers;
         }

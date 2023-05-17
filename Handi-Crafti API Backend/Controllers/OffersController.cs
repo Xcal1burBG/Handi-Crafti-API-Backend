@@ -63,9 +63,9 @@ namespace Handi_Crafti_API_Backend.Controllers
         public async Task<IActionResult> GetOffersByUserId(Guid userId)
         {
             var offers = await this._offersService.GetOffersByUserId(userId);
-            var output = this._mapper.Map<IEnumerable<OfferDTO>>(offers);
+            
 
-            return Ok(output);
+            return Ok(offers);
         }
 
 
@@ -99,7 +99,7 @@ namespace Handi_Crafti_API_Backend.Controllers
 
         // Delete
         [HttpDelete]
-        [Route("delete/{id}")]
+        [Route("delete/{offerId}")]
         public async Task<IActionResult> DeleteOffer(Guid offerId)
         {
             await this._offersService.DeleteOffer(offerId);

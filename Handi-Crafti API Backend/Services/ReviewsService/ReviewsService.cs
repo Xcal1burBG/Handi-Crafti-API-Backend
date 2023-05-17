@@ -41,7 +41,7 @@ namespace Handi_Crafti_API_Backend.Services.ReviewsService
                     ReviewsForHandiCrafter = x.HandiCrafter.Reviews.Select(z => new ReviewDTO
                     {
                         Text = z.Text,
-                        ReviewerUserName = z.HandiCrafter.UserName
+                        ReviewerUserName = z.Customer.UserName
                     }).ToArray()
                 }).ToArrayAsync();
 
